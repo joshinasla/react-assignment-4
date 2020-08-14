@@ -1,14 +1,17 @@
+//let nextTodoId = 0;
 export const addTask = (todo) => {
   return {
     type: "ADD_TASK",
-    todo: todo,
+    payload: {
+      todo,
+    },
   };
 };
-export const deleteTask = (taskId) => {
-  return {
-    type: "DELETE_TASK",
-    payload: taskId,
-  };
-};
+// export const deleteTask = (taskId) => {
+//   return {
+//     type: "DELETE_TASK",
+//     payload: taskId,
+//   };
+// };
 
-export default { addTask, deleteTask };
+export default { addTask };
