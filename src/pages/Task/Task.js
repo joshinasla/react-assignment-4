@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+
 import { deleteTask } from "../../redux/action";
+
 class Task extends Component {
   render() {
     return (
@@ -22,7 +23,11 @@ class Task extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(deleteTask, dispatch);
+  return {
+    deleteItem: (todos) => {
+      return dispatch(deleteTask(todos));
+    },
+  };
 };
 
 const ReduxTask = connect(null, mapDispatchToProps)(Task);

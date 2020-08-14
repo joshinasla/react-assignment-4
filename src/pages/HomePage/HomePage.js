@@ -1,29 +1,32 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { addTask } from "../../redux/action";
+import store from "../../redux/store";
 
 import "./homepage.css";
-import { Link } from "react-router-dom";
 
 class HomePage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      inputvalue: "",
+      todos: this.props.todos || "",
     };
   }
 
   addTodo = () => {
-    const newTask = this.state.inputValue;
-    this.props.addItem(newTask);
+    // const newTask = this.props.todos;
+    // this.props.addItem(newTask);
+    store.dispatch(addTask(this.state.todos));
   };
   handleChange = (e) => {
     this.setState({
-      inputValue: e.target.value,
+      todos: e.target.value,
     });
   };
+
   render() {
     return (
       <div className="form">
@@ -31,27 +34,30 @@ class HomePage extends Component {
         <form className="to-do-form">
           <input
             type="text"
-            value={this.state.inputValue}
+            value={this.state.todos}
             onChange={this.handleChange}
             placeholder="what do u wanna add"
           ></input>
           <button type="submit" onClick={this.addTodo}>
             ADD
           </button>
+          <p>{this.props.todos}</p>
         </form>
         <Link to="/list">See list </Link>
       </div>
     );
   }
 }
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addItem: (todos) => {
-      return dispatch(addTask(todos));
-    },
-  };
+const mapStateToProps = (state) => {
+  return { todos: state.todos };
 };
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     addItem: (todos) => {
+//       return dispatch(addTask(todos));
+//     },
+//   };
+// };
 
-const ReduxAddTodo = connect(null, mapDispatchToProps)(HomePage);
+const ReduxAddTodo = connect(mapStateToProps)(HomePage);
 export default ReduxAddTodo;

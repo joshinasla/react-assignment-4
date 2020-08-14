@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
 import Task from "../Task/Task";
+
 class DisplayList extends Component {
   render() {
     console.log(this.props.tasks);
