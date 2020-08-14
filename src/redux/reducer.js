@@ -1,6 +1,6 @@
 const initialState = {
   nextId: 2,
-  data: {
+  todo: {
     1: {
       content: "content 1",
       completed: false,
@@ -14,11 +14,11 @@ export const myReducer = (state = initialState, action) => {
       console.log(action.todo);
       return {
         ...state,
-        data: {
-          ...state.data,
+        todo: {
+          ...state.todo,
           [state.nextId]: {
             completed: false,
-            content: action.payload.content,
+            content: action.payload.todo,
           },
         },
 
